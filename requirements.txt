@@ -10,3 +10,4 @@ chromadb  # for vector database
 langchain-groq
 python-dotenv
 langchain-ollama
+streamlit>=1.35.0

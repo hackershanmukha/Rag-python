@@ -77,7 +77,8 @@ rag-python/
 │   └── search.py            # RAG orchestration: retrieval + prompt + Groq LLM
 ├── .env.example             # Template for required environment variables
 ├── .gitignore               # Keeps secrets, caches, and vector dumps out of git
-├── app.py                   # Main entry point to build index and run queries
+├── app.py                   # CLI entry point to test queries
+├── streamlit_app.py         # Full interactive Streamlit Web UI
 ├── pyproject.toml           # Project config and dependencies
 └── requirements.txt         # Pip dependency list
 ```
@@ -126,13 +127,22 @@ GROQ_API_KEY=your_groq_api_key_here
 
 ## 💡 Usage
 
-### Add Your Documents
-Place any `.pdf` or `.txt` files inside the `data/` directory:
-- PDFs: `data/pdf_files/`
-- Text files: `data/text_files/`
+### Option 1: Interactive Streamlit Web UI (Recommended) 🖥️
 
-### Run the RAG Pipeline
-Run `app.py`:
+Launch the interactive chat interface in your browser:
+```bash
+streamlit run streamlit_app.py
+```
+**UI Features**:
+- 💬 **Interactive Chat**: Ask questions conversationally with instant answers.
+- 📤 **Document Uploader**: Upload `.pdf` and `.txt` files directly from the browser.
+- 🔄 **One-Click Re-indexing**: Rebuild the FAISS index with a single click.
+- 📚 **Source Inspector**: Expandable citations showing distance metrics and retrieved text chunks.
+- ⚙️ **Custom Model Picker**: Switch between Groq models (Llama 3.3, Llama 3.1, Mixtral, etc.) on the fly.
+
+### Option 2: Command Line (CLI) ⌨️
+
+Place your documents into `data/pdf_files/` or `data/text_files/`, then run:
 ```bash
 python app.py
 ```
@@ -141,7 +151,7 @@ On first run, the system will:
 1. Load all files from `data/`.
 2. Chunk and compute embeddings.
 3. Save the FAISS index locally to `faiss_store/`.
-4. Run your query, retrieve relevant context, and output the Groq-generated response.
+4. Run your test query, retrieve relevant context, and output the Groq-generated response.
 
 On subsequent runs, it detects the existing index and loads it instantly!
 

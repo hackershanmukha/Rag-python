@@ -13,7 +13,8 @@ class RAGSearch:
         self,
         persist_dir: str = "faiss_store",
         embedding_model: str = "all-MiniLM-L6-v2",
-        llm_model: str = "openai/gpt-oss-20b"
+        llm_model: str = "openai/gpt-oss-20b",
+        groq_api_key: str = None
     ):
 
         self.vectorstore = FaissVectorStore(
@@ -45,10 +46,10 @@ class RAGSearch:
             self.vectorstore.load()
 
         # Initialize Groq LLM
-        groq_api_key = os.getenv("GROQ_API_KEY")
+        active_api_key = groq_api_key or os.getenv("GROQ_API_KEY")
 
         self.llm = ChatGroq(
-            groq_api_key=groq_api_key,
+            groq_api_key=active_api_key,
             model_name=llm_model
         )
 
@@ -118,3 +119,41 @@ Answer:"""
         print(response.content)
 
         return response.content
+
+    def search_with_sources(
+        self,
+        query: str,
+        top_k: int = 5
+    ) -> dict:
+        results = self.vectorstore.query(query, top_k=top_k)
+        texts = [
+            r["metadata"].get("text", "")
+            for r in results
+            if r["metadata"]
+        ]
+        context = "\n\n".join(texts)
+
+        if not context:
+            return {
+                "answer": "No relevant documents found.",
+                "sources": []
+            }
+
+        prompt = f"""You are a helpful assistant.
+
+Answer the question using the following context.
+If the answer is not available in the context,
+say that it is not available.
+
+Context:
+{context}
+
+Question:
+{query}
+
+Answer:"""
+        response = self.llm.invoke(prompt)
+        return {
+            "answer": response.content,
+            "sources": results
+        }
