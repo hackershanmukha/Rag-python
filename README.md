@@ -6,6 +6,11 @@ A fast, modular, and lightweight **Retrieval-Augmented Generation (RAG)** pipeli
 [![FAISS](https://img.shields.io/badge/Vector%20Store-FAISS-green.svg)](https://github.com/facebookresearch/faiss)
 [![Groq](https://img.shields.io/badge/LLM%20Inference-Groq-orange.svg)](https://groq.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![LinkedIn Post](https://img.shields.io/badge/LinkedIn-Video%20Walkthrough-0A66C2?logo=linkedin&logoColor=white)](https://lnkd.in/p/gJEtBaj8)
+
+> 📺 **Video Demo & Code Walkthrough**: Watch the prototype explanation and code walkthrough on [LinkedIn](https://lnkd.in/p/gJEtBaj8).
+
+[![RAG Prototype & Code Walkthrough](assets/rag_prototype_streamlit_thumbnail_1793648688548.jpg)](https://lnkd.in/p/gJEtBaj8)
 
 ---
 
