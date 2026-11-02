@@ -1,0 +1,12 @@
+langchain
+langchain-core
+langchain-community
+pypdf 
+pymupdf
+ipykernel
+sentence-transformers  # for embedding models
+faiss-cpu  # for vector similarity search
+chromadb  # for vector database
+langchain-groq
+python-dotenv
+langchain-ollama

@@ -1,0 +1,47 @@
+# Environment variables & secrets (CRITICAL: never commit API keys)
+.env
+.env.*
+!.env.example
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Vector Store indices & generated metadata (built at runtime)
+faiss_store/*.index
+faiss_store/*.pkl
+data/vector_store/
+vector_store/
+chroma_db/
+*.index
+*.pkl
+*.sqlite3
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# IDE and Editor configs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build & packaging
+build/
+dist/
+*.egg-info/
+wheels/
